@@ -48,18 +48,17 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 // retrieve database info from env file
-$secretFile = fopen("../env.php", "r");
+$secretFile = fopen("env.txt", "r");
 
 if ($secretFile == false) {
   echo ("Error in opening database information file");
   exit();
 }
 
-$servername = fgets($secretFile);
-echo "servername: " . $servername;
-$username = fgets($secretFile);
-$password = fgets($secretFile);
-$database = fgets($secretFile);
+$servername = trim(fgets($secretFile));
+$username = trim(fgets($secretFile));
+$password = trim(fgets($secretFile));
+$database = trim(fgets($secretFile));
 
 fclose($secretFile);
 
