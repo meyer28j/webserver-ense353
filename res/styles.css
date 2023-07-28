@@ -1,0 +1,17 @@
+.flex-container {
+    background-color: powderblue;
+    padding: 20px;
+
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-item {
+    margin: 20px;
+    border: 3px solid black;
+}
+
+.employee-data {
+    width: 150px;
+    border: 1px solid black;
+}

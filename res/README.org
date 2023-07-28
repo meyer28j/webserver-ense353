@@ -1,0 +1,5 @@
+#+title: README
+
+* Webmail Server
+
+This is a webmail server made for a university class; any and all resources are used for educational purposes only.
