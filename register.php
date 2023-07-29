@@ -20,17 +20,24 @@
                 $emailError = "Email is required";
             else
                 $email =  trim_input($_POST["email"]);
-             if (empty($_POST["password"]))
-                $passwordError = "password is required";
-             else
-                $password = trim_input($_POST["password"]);
-             if (empty($_POST["passwordVerify"]))
-                $passwordVerifyError = "password verification is required";
-             elseif ($_POST["password"] != $_POST["passwordVerify"])
-                $passwordVerifyError = "passwords do not match";
-             else
-                $passwordVerify = trim_input($_POST["passwordVerify"]);
-    }
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+                $emailError = "Invalid email format";
+            if (empty($_POST["password"]))
+               $passwordError = "password is required";
+            else
+               $password = trim_input($_POST["password"]);
+            if (empty($_POST["passwordVerify"]))
+               $passwordVerifyError = "password verification is required";
+            else
+               $passwordVerify = trim_input($_POST["passwordVerify"]);
+            if ($_POST["password"] != $_POST["passwordVerify"])
+               $passwordVerifyError = "passwords do not match";
+
+            // use error messages as flags; all messages clear == all valid input
+            if (empty($usernameError) && empty($emailError) && empty($passwordError) && empty($passwordVerifyError)) {
+               echo "EVERYTHING WORKED WAY TO GO";
+            }
+       }
  ?>
 
 <!DOCTYPE html>
@@ -45,6 +52,7 @@
     <link href="/res/normalize.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <?php include 'menu.php';?>
     <h1>Registration</h1>
     <p>I WILL BECOME THE BEST REGISTRATION PAGE IN THE WORLD</p>
     <div class="container">
@@ -68,7 +76,7 @@
         <div class="row">
           <div class="six columns">
             <label for "passwordInput">Password</label>
-            <input class="u-full-width" type="password" id="passwordInput" name="password">
+            <input class="u-full-width" type="password" id="passwordInput" name="password" value=<?php echo $password;?>>
              <span class="error">* <?php echo $passwordError;?></span>
             <br><br>
           </div>
@@ -76,7 +84,7 @@
         <div class="row">
           <div class="six columns">
             <label for "passwordVerifyInput">Re-type Password</label>
-            <input class="u-full-width" type="password" id="passwordVerifyInput" name="passwordVerify">
+            <input class="u-full-width" type="password" id="passwordVerifyInput" name="passwordVerify" value=<?php echo $passwordVerify;?>>
             <span class="error">* <?php echo $passwordVerifyError;?></span>
             <br><br>
           </div>

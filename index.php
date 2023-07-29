@@ -9,6 +9,7 @@
   </head>
   
   <body>
+    <?php include 'menu.php';?>
     <h1>Home</h1>
     <p>Go to <a href="employees.php">Employees</a> page</p>
     <p>Hello World! I am a web server running off of Apache!</p>

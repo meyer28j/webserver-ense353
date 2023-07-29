@@ -10,7 +10,8 @@
         <link href="/res/normalize.css" media="screen" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h1>Login</h1>
+      <?php include 'menu.php';?>
+      <h1>Login</h1>
         <p>I WILL BECOME THE BEST LOGIN PAGE IN THE WORLD</p>
         <form action="processLogin.php" method="post">
             <div class="row">

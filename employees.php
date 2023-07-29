@@ -7,9 +7,10 @@
 <link href="/res/skeleton.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="/res/normalize.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
-
-<h1>Employees</h1>
-<p>
+<body>
+  <?php include 'menu.php';?>
+  <h1>Employees</h1>
+  <p>
 	Return to
 	<a href="index.html">
 	   Home
@@ -22,6 +23,8 @@
 </p>
 
 <?php
+
+include 'dbConnect.php';
 
 // connection and table construction code scooped from w3schools.com
 // https://www.w3schools.com/php/php_mysql_select.asp
@@ -47,27 +50,9 @@ class TableRows extends RecursiveIteratorIterator {
         }
 }
 
-// retrieve database info from env file
-$secretFile = fopen("env.txt", "r");
+  $connection = dbConnect();
 
-if ($secretFile == false) {
-  echo ("Error in opening database information file");
-  exit();
-}
-
-$servername = trim(fgets($secretFile));
-$username = trim(fgets($secretFile));
-$password = trim(fgets($secretFile));
-$database = trim(fgets($secretFile));
-
-fclose($secretFile);
-
-// begin server connection
-try {
-    $connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully";
-
+  if ($connection != false) {
     $query = "SELECT * FROM Employees LIMIT 100"; // LIMIT in case we upscale... :P
 
     $prepared_query = $connection->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
@@ -79,10 +64,8 @@ try {
     foreach(new TableRows(new RecursiveArrayIterator($prepared_query->fetchAll())) as $k=>$v) {
     	echo $v;
     }
+  }
 
-} catch (PDOException $e) {
-    echo "Error! Stack trace: " . $e->getMessage();
-}
 
 
 $connection = null;
