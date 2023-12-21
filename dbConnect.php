@@ -1,4 +1,7 @@
 <?php
+
+// Returns: PDO connection variable if successful
+//          or false if connection unsuccessful
 function dbConnect() {
     // retrieve database info from env file
     $secretFile = fopen("env.txt", "r");

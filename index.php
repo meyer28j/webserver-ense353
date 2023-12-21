@@ -1,3 +1,16 @@
+<?php
+include 'api.php';
+include 'menu.php';
+
+$query = "SELECT movie_id FROM Movies";
+
+$statement = dbConnect()->prepare($query);
+$statement->execute();
+
+$movies = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,19 +22,12 @@
   </head>
   
   <body>
-    <?php include 'menu.php';?>
-    <h1>Home</h1>
-    <p>Go to <a href="employees.php">Employees</a> page</p>
-    <p>Hello World! I am a web server running off of Apache!</p>
-    <h2>Movie Posters</h2>
-    <p>NOTE: all images are taken from <a href="https://www.movieposters.com/">https://www.movieposters.com/</a> and are being used on this site explicitly for educational purposes.</p>
-    <div class="flex-container">
-      <img class="flex-item" src="res/raiders.jpg">
-      <img class="flex-item" src="res/doom.jpg">
-      <img class="flex-item" src="res/crusade.jpg">
-      <img class="flex-item" src="res/crystal.jpg">
-      <img class="flex-item" src="res/destiny.jpg">
-      <img class="flex-item" src="res/patriot.jpg">
+    <div class="container u-max-full-width">
+      <br>
+      <h2>Welcome</h2>
+      <h1>Subscribe and keep up to date on your favourite movies.</h1>
+      <p>NOTE: all resources used on this website are taken from <a href="https://www.themoviedb.org" target="_blank" rel="noopener noreferrer">themoviedb.org</a> and are being used explicitly for educational purposes.</p>
+      <p>You must <a href="/login.php">Login</a> before you can subscribe to any movies.
     </div>
   </body>
 </html>
